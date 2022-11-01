@@ -1,0 +1,96 @@
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+CIS 120 HW05 README
+PennKey: 63639211
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+
+============
+=: Task 2 :=
+============
+
+- Do you plan on creating any new classes in your design? If so, what classes
+  are you making, what do they store, and what behaviors do they have?
+    I am making a Channel class that creates new objects that contain the
+    owner and list of users for now.
+
+- How do you plan on storing what users are registered on the server?
+    I plan on storing them in the Channel class as a private instance variable.
+
+- How do you plan on keeping track of which user has which user ID, considering
+  the fact that the user's nickname can change over the course of the program?
+    I will make a TreeMap that has a key = user ID and Value = nickname that
+    will allow the user to have a connection from the ID even when the
+    nickname changes.
+
+- How do you plan on storing what users are in a channel?
+    I will store as a Collection of Strings into userList.
+
+- How do you plan on keeping track of which user is the owner of each channel?
+    There will be a separate String owner that is also in the userList.
+
+- Justify your choice of collections (Set, Map, or List) for the
+  collections you use in your design.
+    channels and registeredUsers have Map because there needs to be an
+    identification String along with an Integer or Channel class. In
+    getRegisteredUsers() getUsersInChannel(), and getOwner(), I
+    used a Set because there cannot be duplicate nicknames.
+
+
+
+============
+=: Task 3 :=
+============
+
+- Did you make any changes to your design while doing this task? Why?
+    I created an extra banUser() function in the Channel class to access
+    the userList in the channels value and remove the user for
+    deRegisterUser(). I also added registerUser(), which adds the
+    Entry to the registeredUsers and changeNickname(), which allows
+    the nickname to change in the registeredUsers and return the
+    users that have channel connections with the user with the given
+    nickname.
+
+
+============
+=: Task 4 :=
+============
+
+- Did you make any changes to your design while doing this task? Why?
+    I added addUser() function in the Channel class to access the userList for the
+    joinChannel() function in ServerModel class. I created createChannel() and
+    joinChannel() that would each add a channel to the channels Collection and
+    add a user to the channel's userList.
+    I also made a constructor for the Channel class to add channels in createChannel()
+    to the channels Collection. The parameter has a string of the user nickname which
+    will be saved as the owner of the channel and automatically added to its userList.
+    The sendMessage would send a Message
+    to the entire channel's userList and leaveChannel would use banUser() to
+    the corresponding channel's userList.
+
+============
+=: Task 5 :=
+============
+
+- How do you plan on keeping track of which channels are invite-only?
+    There will be a new private instance boolean variable called isPrivate that
+    will determine if the channel is private or public. The constructor will also
+    have a parameter with the boolean to keep track of isPrivate in the constructor.
+- Will you make any changes to your work from before in order to make
+  implementing invite-only channels easier?
+    I will make changes in createChannel by using isInviteOnly to see if the channel
+    created is private and use getIsPrivate() that I created from the channel class
+    to find if the channel is private when a user is added or invited for joinChannel()
+    and inviteUser();
+
+============
+=: Task 6 :=
+============
+
+- Did you have to make any changes to your design in Task 6? Why?
+    I changed getNickName() to use contains instead of using a for loop to check
+    every key for an Entry in the registeredUsers. I also created object variables for
+    repetitive objects I used, such as using ChannelValue for every channels.getValue().
+- If you were to redo this assignment, what changes (if any) would you make in
+  how you designed your code?
+    I would create a Map for the userList instead of a TreeSet because I can more easily
+    make changes to nicknames without having to add and ban the nicknames from the userList
+    everytime.
